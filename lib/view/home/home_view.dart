@@ -1,4 +1,5 @@
 import 'package:currency_rate_app/model/Currency.dart';
+import 'package:currency_rate_app/view/details/details_view.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,14 @@ class HomeView extends StatelessWidget {
       countryCode: FlagsCode.US,
       code: "USD",
       symbol: "\$",
-      value: 4.3,
+      value: 4.4726,
     ),
     Currency(
       name: "Euro",
       countryCode: FlagsCode.EU,
       code: "EU",
       symbol: "€",
-      value: 5.64,
+      value: 4.3840,
     ),
   ];
 
@@ -35,6 +36,10 @@ class HomeView extends StatelessWidget {
               if (kDebugMode) {
                 print(currencies[index].name);
               }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DetailsView()),
+              );
             },
             child: Card(
               child: Container(
