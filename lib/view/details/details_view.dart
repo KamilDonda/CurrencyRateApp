@@ -4,6 +4,7 @@ import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class DetailsView extends StatelessWidget {
   const DetailsView({Key? key}) : super(key: key);
@@ -63,19 +64,33 @@ class DetailsView extends StatelessWidget {
   }
 
   Widget _navigationBar(BuildContext context, int index) {
-    return BottomNavigationBar(
-      currentIndex: index,
-      onTap: (index) => context.read<TabCubit>().changeTab(index),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.list),
-          label: list,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.bar_chart),
-          label: plot,
-        ),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 20,
+            color: Colors.black.withOpacity(.1),
+          )
+        ],
+      ),
+      child: GNav(
+          rippleColor: Colors.grey[300]!,
+          hoverColor: Colors.grey[100]!,
+          gap: 8,
+          activeColor: Colors.black,
+          iconSize: 24,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          duration: const Duration(milliseconds: 100),
+          tabBackgroundColor: Colors.grey[100]!,
+          color: Colors.black,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          tabs: const [
+            GButton(icon: Icons.list, text: list),
+            GButton(icon: Icons.bar_chart, text: plot),
+          ],
+          selectedIndex: index,
+          onTabChange: (index) => context.read<TabCubit>().changeTab(index)),
     );
   }
 }
