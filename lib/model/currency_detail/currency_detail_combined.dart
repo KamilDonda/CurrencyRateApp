@@ -1,10 +1,10 @@
-class DetailCurrencyCombined {
+class CurrencyDetailCombined {
   final String date;
   final double bid;
   final double ask;
   final double mid;
 
-  DetailCurrencyCombined({
+  CurrencyDetailCombined({
     required this.date,
     required this.bid,
     required this.ask,

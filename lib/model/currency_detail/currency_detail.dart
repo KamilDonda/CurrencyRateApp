@@ -1,14 +1,14 @@
-class DetailCurrencyMid {
+class CurrencyDetail {
   List<Rates>? rates;
   String? error;
 
-  DetailCurrencyMid({this.rates});
+  CurrencyDetail({this.rates});
 
-  DetailCurrencyMid.withError(String errorMessage) {
+  CurrencyDetail.withError(String errorMessage) {
     error = errorMessage;
   }
 
-  DetailCurrencyMid.fromJson(Map<String, dynamic> json) {
+  CurrencyDetail.fromJson(Map<String, dynamic> json) {
     if (json['rates'] != null) {
       rates = <Rates>[];
       json['rates'].forEach((v) {
@@ -28,19 +28,22 @@ class DetailCurrencyMid {
 
 class Rates {
   String? effectiveDate;
-  double? mid;
+  double? bid;
+  double? ask;
 
-  Rates({this.effectiveDate, this.mid});
+  Rates({this.effectiveDate, this.bid, this.ask});
 
   Rates.fromJson(Map<String, dynamic> json) {
     effectiveDate = json['effectiveDate'];
-    mid = json['mid'];
+    bid = json['bid'];
+    ask = json['ask'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['effectiveDate'] = effectiveDate;
-    data['mid'] = mid;
+    data['bid'] = bid;
+    data['ask'] = ask;
     return data;
   }
 }
