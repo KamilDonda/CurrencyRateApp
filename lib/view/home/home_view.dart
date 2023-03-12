@@ -1,8 +1,10 @@
 import 'package:currency_rate_app/model/Currency.dart';
+import 'package:currency_rate_app/view/details/cubit/detail_currency_cubit.dart';
 import 'package:currency_rate_app/view/details/details_view.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class HomeView extends StatelessWidget {
     Currency(
       name: "Euro",
       countryCode: FlagsCode.EU,
-      code: "EU",
+      code: "EUR",
       symbol: "€",
       value: 4.3840,
     ),
@@ -40,6 +42,9 @@ class HomeView extends StatelessWidget {
               if (kDebugMode) {
                 print(currencies[index].name);
               }
+              context.read<DetailCurrencyCubit>().getDetailCurrency(
+                    currencies[index].code.toLowerCase(),
+                  );
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const DetailsView()),

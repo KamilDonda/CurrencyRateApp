@@ -1,3 +1,4 @@
+import 'package:currency_rate_app/view/details/cubit/detail_currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/home/home_view.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => TabCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => TabCubit()),
+        BlocProvider(create: (_) => DetailCurrencyCubit()),
+      ],
       child: MaterialApp(
         title: 'Currency Rate App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: BlocProvider(
-          create: (_) => TabCubit(),
-          child: const HomeView(),
-        ),
+        home: const HomeView(),
       ),
     );
   }
