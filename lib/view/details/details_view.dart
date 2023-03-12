@@ -41,6 +41,21 @@ class DetailsView extends StatelessWidget {
     return BlocBuilder<TabCubit, int>(
       builder: (_, index) {
         return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text("Szczegóły"),
+            leading: BackButton(),
+            actions: [
+              Container(
+                padding: const EdgeInsets.only(right: 12),
+                alignment: Alignment.center,
+                child: Text(
+                  "USD",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
           body: SafeArea(child: _tab(index)),
           bottomNavigationBar: _navigationBar(context, index),
         );
