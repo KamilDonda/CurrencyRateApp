@@ -4,6 +4,7 @@ import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'Currency Rate App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
         ),
         home: const HomeView(),
       ),
