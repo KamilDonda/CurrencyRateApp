@@ -1,5 +1,4 @@
 import 'package:currency_rate_app/model/detail_currency/detail_currency_combined.dart';
-import 'package:currency_rate_app/model/detail_currency/detail_currency_mid.dart';
 import 'package:currency_rate_app/view/details/cubit/detail_currency_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/detail_currency_header.dart';
 import 'package:currency_rate_app/view/details/widgets/detail_currency_item.dart';
@@ -15,23 +14,20 @@ class ListTab extends StatelessWidget {
       children: [
         const DetailCurrencyHeader(),
         Expanded(
-          child: BlocBuilder<DetailCurrencyCubit, DetailCurrencyMid>(
+          child: BlocBuilder<DetailCurrencyCubit, List<DetailCurrencyCombined>>(
             builder: (_, currencies) {
-              if (currencies.rates != null) {
-                return ListView.builder(
-                  padding: const EdgeInsets.all(4),
-                  itemCount: currencies.rates?.length,
-                  itemBuilder: (_, index) => DetailCurrencyItem(
-                    currency: DetailCurrencyCombined(
-                      date: currencies.rates![index].effectiveDate!,
-                      bid: 0,
-                      ask: 0,
-                      mid: currencies.rates![index].mid!,
-                    ),
+              return ListView.builder(
+                padding: const EdgeInsets.all(4),
+                itemCount: currencies.length,
+                itemBuilder: (_, index) => DetailCurrencyItem(
+                  currency: DetailCurrencyCombined(
+                    date: currencies[index].date,
+                    bid: currencies[index].bid,
+                    ask: currencies[index].ask,
+                    mid: currencies[index].mid,
                   ),
-                );
-              }
-              return const SizedBox();
+                ),
+              );
             },
           ),
         ),

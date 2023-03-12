@@ -2,7 +2,6 @@ import 'package:currency_rate_app/model/Currency.dart';
 import 'package:currency_rate_app/view/details/cubit/detail_currency_cubit.dart';
 import 'package:currency_rate_app/view/details/details_view.dart';
 import 'package:flag/flag.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,15 +38,13 @@ class HomeView extends StatelessWidget {
           itemCount: currencies.length,
           itemBuilder: (_, index) => GestureDetector(
             onTap: () {
-              if (kDebugMode) {
-                print(currencies[index].name);
-              }
+              var code = currencies[index].code;
               context.read<DetailCurrencyCubit>().getDetailCurrency(
-                    currencies[index].code.toLowerCase(),
+                    code.toLowerCase(),
                   );
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const DetailsView()),
+                MaterialPageRoute(builder: (_) => DetailsView(code: code)),
               );
             },
             child: Card(

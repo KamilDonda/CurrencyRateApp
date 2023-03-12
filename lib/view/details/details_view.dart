@@ -6,11 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({Key? key}) : super(key: key);
+  final String code;
+
+  const DetailsView({Key? key, required this.code}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var chosenCurrency = "USD";
     return BlocBuilder<TabCubit, int>(
       builder: (_, index) {
         return Scaffold(
@@ -23,7 +24,7 @@ class DetailsView extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 12),
                 alignment: Alignment.center,
                 child: Text(
-                  chosenCurrency,
+                  code,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w500),
                 ),
