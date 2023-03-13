@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'Currency Rate App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
         ),
         home: const HomeView(),
       ),

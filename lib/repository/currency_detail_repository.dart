@@ -6,27 +6,6 @@ import 'package:flag/flag_enum.dart';
 class CurrencyDetailRepository {
   final _restApiService = RestApiService();
 
-  Future<List<Currency>> getLastCurrenciesValue() async {
-    var usd = await _restApiService.getLastValue("usd");
-    var eur = await _restApiService.getLastValue("eur");
-    return [
-      Currency(
-        name: "Dolar\nAmerykański",
-        countryCode: FlagsCode.US,
-        code: "USD",
-        symbol: "\$",
-        value: usd.rates!.first.mid!,
-      ),
-      Currency(
-        name: "Euro",
-        countryCode: FlagsCode.EU,
-        code: "EUR",
-        symbol: "€",
-        value: eur.rates!.first.mid!,
-      ),
-    ];
-  }
-
   Future<List<CurrencyDetailCombined>> getLast30Values(String code) async {
     var detail = await _restApiService.getLast30Values(code);
     var detailMid = await _restApiService.getLast30MidValues(code);
@@ -51,5 +30,28 @@ class CurrencyDetailRepository {
     }
 
     return detailsList;
+  }
+
+  Future<List<Currency>> getLastCurrenciesValue() async {
+    var usd = await _restApiService.getLastValue("usd");
+    var eur = await _restApiService.getLastValue("eur");
+    return [
+      Currency(
+        name: "Dolar\nAmerykański",
+        countryCode: FlagsCode.US,
+        code: "USD",
+        symbol: "\$",
+        value: usd.rates!.first.mid!,
+        date: usd.rates!.first.effectiveDate!.toString(),
+      ),
+      Currency(
+        name: "Euro",
+        countryCode: FlagsCode.EU,
+        code: "EUR",
+        symbol: "€",
+        value: eur.rates!.first.mid!,
+        date: eur.rates!.first.effectiveDate!.toString(),
+      ),
+    ];
   }
 }

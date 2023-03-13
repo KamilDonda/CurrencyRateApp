@@ -1,5 +1,6 @@
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
+import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,13 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 class DetailsView extends StatelessWidget {
   final String code;
+  final Currency currency;
 
-  const DetailsView({Key? key, required this.code}) : super(key: key);
+  const DetailsView({
+    Key? key,
+    required this.code,
+    required this.currency,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +40,19 @@ class DetailsView extends StatelessWidget {
               ),
             ],
           ),
-          body: SafeArea(child: _tab(index)),
+          body: SafeArea(child: _tab(index, currency)),
           bottomNavigationBar: _navigationBar(context, index),
         );
       },
     );
   }
 
-  Widget _tab(int index) {
+  Widget _tab(int index, Currency currency) {
     return Stack(
       children: [
         Offstage(
           offstage: index != 0,
-          child: const ListTab(),
+          child: ListTab(currency: currency),
         ),
         Offstage(
           offstage: index != 1,

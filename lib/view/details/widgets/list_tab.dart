@@ -1,17 +1,32 @@
+import 'package:currency_rate_app/constants/typography.dart';
+import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_item.dart';
+import 'package:currency_rate_app/view/details/widgets/currency_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListTab extends StatelessWidget {
-  const ListTab({Key? key}) : super(key: key);
+  final Currency currency;
+
+  const ListTab({Key? key, required this.currency}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          child: Text(
+            "Aktualizacja: ${currency.date}",
+            style: CustomTypography.updateStyle,
+          ),
+        ),
+        CurrencyItem(currency: currency),
+        const SizedBox(height: 8),
         const DetailCurrencyHeader(),
         Expanded(
           child: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>>(

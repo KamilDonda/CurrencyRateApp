@@ -6,6 +6,7 @@ class Currency {
   final String code;
   final String symbol;
   final double value;
+  final String date;
 
   Currency({
     required this.name,
@@ -13,5 +14,6 @@ class Currency {
     required this.code,
     required this.symbol,
     required this.value,
+    required this.date,
   });
 }
