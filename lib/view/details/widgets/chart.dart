@@ -47,7 +47,8 @@ class Chart extends StatelessWidget {
                       // left: 10,
                       // top: 10,
                       ),
-                  child: LineChart(_lineChartData(currencies)),
+                  child: LineChart(
+                      _lineChartData(currencies, yMin, yMax, yInterval)),
                 ),
               ),
               _yLabel(
@@ -96,12 +97,8 @@ class Chart extends StatelessWidget {
     );
   }
 
-  LineChartData _lineChartData(List<CurrencyDetailCombined> currencies) {
-    double yMin = currencies.map((e) => e.mid).min;
-    double yMax = currencies.map((e) => e.mid).max;
-    double dy = yMax - yMin;
-    double yInterval = dy / 3;
-
+  LineChartData _lineChartData(List<CurrencyDetailCombined> currencies,
+      double yMin, double yMax, double yInterval) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
