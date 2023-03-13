@@ -1,3 +1,4 @@
+import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Wybierz walutę",
+          CustomTexts.chooseCurrency,
           style: CustomTypography.appbarStyle,
         ),
       ),

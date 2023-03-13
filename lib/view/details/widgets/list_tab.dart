@@ -1,3 +1,4 @@
+import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
@@ -21,7 +22,7 @@ class ListTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
           child: Text(
-            "Aktualizacja:    ${currency.date}",
+            CustomTexts.update(currency),
             style: CustomTypography.updateStyle,
           ),
         ),
@@ -34,6 +35,7 @@ class ListTab extends StatelessWidget {
         Expanded(
           child: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>>(
             builder: (_, currencies) {
+              currencies = currencies.reversed.toList();
               return ListView.separated(
                 padding: const EdgeInsets.all(4),
                 itemCount: currencies.length,

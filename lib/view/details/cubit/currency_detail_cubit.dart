@@ -8,6 +8,6 @@ class CurrencyDetailCubit extends Cubit<List<CurrencyDetailCombined>> {
   final _repository = CurrencyDetailRepository();
 
   void setCurrencyDetail(String code) async {
-    emit((await _repository.getLast30Values(code)).reversed.toList());
+    emit(await _repository.getLast30Values(code));
   }
 }

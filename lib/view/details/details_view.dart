@@ -3,6 +3,7 @@ import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
+import 'package:currency_rate_app/view/details/widgets/plot_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -25,7 +26,7 @@ class DetailsView extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Szczegóły",
+              CustomTexts.details,
               style: CustomTypography.appbarStyle,
             ),
             leading: const BackButton(),
@@ -56,7 +57,7 @@ class DetailsView extends StatelessWidget {
         ),
         Offstage(
           offstage: index != 1,
-          child: const Text("2"),
+          child: PlotTab(currency: currency),
         ),
       ],
     );
@@ -85,8 +86,8 @@ class DetailsView extends StatelessWidget {
           color: Colors.black,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           tabs: const [
-            GButton(icon: Icons.list, text: list),
-            GButton(icon: Icons.bar_chart, text: plot),
+            GButton(icon: Icons.list, text: CustomTexts.list),
+            GButton(icon: Icons.bar_chart, text: CustomTexts.plot),
           ],
           selectedIndex: index,
           onTabChange: (index) => context.read<TabCubit>().changeTab(index)),
