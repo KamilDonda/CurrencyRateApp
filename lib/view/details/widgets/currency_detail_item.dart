@@ -20,24 +20,22 @@ class DetailCurrencyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: items
-              .mapIndexed((index, item) => Expanded(
-                    flex: index == 0 ? 4 : 3,
-                    child: Text(
-                      item,
-                      textAlign: TextAlign.center,
-                      style: index == 0
-                          ? CustomTypography.dateStyle
-                          : CustomTypography.currencyStyle,
-                    ),
-                  ))
-              .toList(),
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: items
+            .mapIndexed((index, item) => Expanded(
+                  flex: index == 0 ? 4 : 3,
+                  child: Text(
+                    item,
+                    textAlign: TextAlign.center,
+                    style: index == 0
+                        ? CustomTypography.dateStyle
+                        : CustomTypography.currencyStyle,
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

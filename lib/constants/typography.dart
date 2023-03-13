@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomTypography {
   static const TextStyle currencyStyle = TextStyle(
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: Colors.black,
+    color: Color(0xFF4F4F4F),
   );
 
   static const TextStyle dateStyle = TextStyle(
@@ -18,7 +18,7 @@ class CustomTypography {
     fontSize: 16,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
-    color: Color(0xFF4F4F4F),
+    color: Colors.black,
   );
 
   static TextStyle appbarStyle = const TextStyle(

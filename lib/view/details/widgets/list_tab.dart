@@ -21,17 +21,20 @@ class ListTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
           child: Text(
-            "Aktualizacja: ${currency.date}",
+            "Aktualizacja:    ${currency.date}",
             style: CustomTypography.updateStyle,
           ),
         ),
-        CurrencyItem(currency: currency),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: CurrencyItem(currency: currency),
+        ),
         const SizedBox(height: 8),
         const DetailCurrencyHeader(),
         Expanded(
           child: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>>(
             builder: (_, currencies) {
-              return ListView.builder(
+              return ListView.separated(
                 padding: const EdgeInsets.all(4),
                 itemCount: currencies.length,
                 itemBuilder: (_, index) => DetailCurrencyItem(
@@ -42,6 +45,8 @@ class ListTab extends StatelessWidget {
                     mid: currencies[index].mid,
                   ),
                 ),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
               );
             },
           ),

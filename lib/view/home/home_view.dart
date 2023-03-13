@@ -22,32 +22,31 @@ class HomeView extends StatelessWidget {
       ),
       body: SafeArea(
         child: BlocBuilder<CurrencyCubit, List<Currency>>(
-            builder: (_, currencies) {
-          return ListView.separated(
-            padding: const EdgeInsets.all(4),
-            itemCount: currencies.length,
-            itemBuilder: (_, index) => GestureDetector(
-              onTap: () {
-                var code = currencies[index].code;
-                context.read<CurrencyDetailCubit>().setCurrencyDetail(
-                      code.toLowerCase(),
-                    );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DetailsView(
-                      code: code,
-                      currency: currencies[index],
+          builder: (_, currencies) {
+            return ListView.builder(
+              padding: const EdgeInsets.all(4),
+              itemCount: currencies.length,
+              itemBuilder: (_, index) => GestureDetector(
+                onTap: () {
+                  var code = currencies[index].code;
+                  context.read<CurrencyDetailCubit>().setCurrencyDetail(
+                        code.toLowerCase(),
+                      );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DetailsView(
+                        code: code,
+                        currency: currencies[index],
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: CurrencyItem(currency: currencies[index]),
-            ),
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
-          );
-        }),
+                  );
+                },
+                child: Card(child: CurrencyItem(currency: currencies[index])),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
