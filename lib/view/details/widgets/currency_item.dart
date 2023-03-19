@@ -11,45 +11,59 @@ class CurrencyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flag.fromCode(
-            currency.countryCode,
-            width: 50,
-            height: 50,
-            fit: BoxFit.fitWidth,
-            flagSize: FlagSize.size_4x3,
-          ),
-          SizedBox(
-            width: 50,
-            child: Text(
-              currency.code,
-              textAlign: TextAlign.center,
-              style: CustomTypography.codeStyle,
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      shadowColor: Colors.black,
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Container(
+        color: Colors.transparent,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Flag.fromCode(
+                  currency.countryCode,
+                  width: 55,
+                  height: 55,
+                  fit: BoxFit.fitWidth,
+                  flagSize: FlagSize.size_4x3,
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      currency.code,
+                      style: CustomTypography.codeStyle,
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      currency.name,
+                      style: CustomTypography.currencyNameStyle,
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            width: 100,
-            child: Text(
-              currency.name,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: CustomTypography.currencyNameStyle,
+            RichText(
+              text: TextSpan(
+                text: "${currency.value.toInt()},",
+                style: CustomTypography.currencyValueStyle,
+                children: [
+                  TextSpan(
+                    text: currency.value.toStringAsFixed(2).split('.')[1],
+                    style: CustomTypography.currencyValueStyle2,
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            width: 80,
-            child: Text(
-              currency.value.toStringAsFixed(2),
-              textAlign: TextAlign.center,
-              style: CustomTypography.currencyValueStyle,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

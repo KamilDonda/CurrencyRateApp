@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
                     ),
                   );
                 },
-                child: Card(child: CurrencyItem(currency: currencies[index])),
+                child: CurrencyItem(currency: currencies[index]),
               ),
             );
           },

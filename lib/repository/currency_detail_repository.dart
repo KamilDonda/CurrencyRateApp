@@ -35,13 +35,14 @@ class CurrencyDetailRepository {
   Future<List<Currency>?> getLastCurrenciesValue() async {
     var usd = await _restApiService.getLastValue("usd");
     var eur = await _restApiService.getLastValue("eur");
+    var gbp = await _restApiService.getLastValue("gbp");
+    var chf = await _restApiService.getLastValue("chf");
     try {
       return [
         Currency(
-          name: "Dolar\nAmerykański",
+          name: "Dolar Amerykański",
           countryCode: FlagsCode.US,
           code: "USD",
-          symbol: "\$",
           value: usd!.rates!.first.mid!,
           date: usd.rates!.first.effectiveDate!.toString(),
         ),
@@ -49,9 +50,22 @@ class CurrencyDetailRepository {
           name: "Euro",
           countryCode: FlagsCode.EU,
           code: "EUR",
-          symbol: "€",
           value: eur!.rates!.first.mid!,
           date: eur.rates!.first.effectiveDate!.toString(),
+        ),
+        Currency(
+          name: "Funt szterling",
+          countryCode: FlagsCode.GB,
+          code: "GBP",
+          value: gbp!.rates!.first.mid!,
+          date: gbp.rates!.first.effectiveDate!.toString(),
+        ),
+        Currency(
+          name: "Frank szwajcarski",
+          countryCode: FlagsCode.CH,
+          code: "CHF",
+          value: chf!.rates!.first.mid!,
+          date: chf.rates!.first.effectiveDate!.toString(),
         ),
       ];
     } catch (e) {
