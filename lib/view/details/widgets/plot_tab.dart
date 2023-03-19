@@ -30,8 +30,16 @@ class PlotTab extends StatelessWidget {
           child: CurrencyItem(currency: currency),
         ),
         const Divider(),
-        BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>>(
+        BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>?>(
           builder: (_, currencies) {
+            if (currencies == null || currencies.isEmpty) {
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+
             List<CurrencyDetailCombined> data = [];
             data.addAll(currencies);
             data.insert(0, currencies.first);

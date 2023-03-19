@@ -33,15 +33,23 @@ class ListTab extends StatelessWidget {
         const SizedBox(height: 8),
         const DetailCurrencyHeader(),
         Expanded(
-          child: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>>(
+          child:
+              BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>?>(
             builder: (_, currencies) {
+              if (currencies == null || currencies.isEmpty) {
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
               currencies = currencies.reversed.toList();
               return ListView.separated(
                 padding: const EdgeInsets.all(4),
                 itemCount: currencies.length,
                 itemBuilder: (_, index) => DetailCurrencyItem(
                   currency: CurrencyDetailCombined(
-                    date: currencies[index].date,
+                    date: currencies![index].date,
                     bid: currencies[index].bid,
                     ask: currencies[index].ask,
                     mid: currencies[index].mid,

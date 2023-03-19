@@ -4,10 +4,6 @@ class CurrencyDetailMid {
 
   CurrencyDetailMid({this.rates});
 
-  CurrencyDetailMid.withError(String errorMessage) {
-    error = errorMessage;
-  }
-
   CurrencyDetailMid.fromJson(Map<String, dynamic> json) {
     if (json['rates'] != null) {
       rates = <Rates>[];

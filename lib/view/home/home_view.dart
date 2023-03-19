@@ -22,8 +22,15 @@ class HomeView extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: BlocBuilder<CurrencyCubit, List<Currency>>(
+        child: BlocBuilder<CurrencyCubit, List<Currency>?>(
           builder: (_, currencies) {
+            if (currencies == null || currencies.isEmpty) {
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
             return ListView.builder(
               padding: const EdgeInsets.all(4),
               itemCount: currencies.length,
