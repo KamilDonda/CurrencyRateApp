@@ -37,6 +37,7 @@ class HomeView extends StatelessWidget {
               itemBuilder: (_, index) => GestureDetector(
                 onTap: () {
                   var code = currencies[index].code;
+                  context.read<CurrencyDetailCubit>().clear();
                   context.read<CurrencyDetailCubit>().setCurrencyDetail(
                         code.toLowerCase(),
                       );

@@ -1,6 +1,8 @@
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/currency.dart';
+import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
 import 'package:currency_rate_app/view/details/widgets/plot_tab.dart';
@@ -49,17 +51,21 @@ class DetailsView extends StatelessWidget {
   }
 
   Widget _tab(int index, Currency currency) {
-    return Stack(
-      children: [
-        Offstage(
-          offstage: index != 0,
-          child: ListTab(currency: currency),
-        ),
-        Offstage(
-          offstage: index != 1,
-          child: PlotTab(currency: currency),
-        ),
-      ],
+    return BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>?>(
+      builder: (_, currencies) {
+        return Stack(
+          children: [
+            Offstage(
+              offstage: index != 0,
+              child: ListTab(currency: currency, currencies: currencies),
+            ),
+            Offstage(
+              offstage: index != 1,
+              child: PlotTab(currency: currency, currencies: currencies),
+            ),
+          ],
+        );
+      },
     );
   }
 
