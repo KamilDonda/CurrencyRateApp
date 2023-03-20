@@ -1,3 +1,4 @@
+import 'package:currency_rate_app/constants/custom_colors.dart';
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/currency.dart';
@@ -72,7 +73,7 @@ class DetailsView extends StatelessWidget {
   Widget _navigationBar(BuildContext context, int index) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: CustomColors.blue1,
         boxShadow: [
           BoxShadow(
             blurRadius: 20,
@@ -81,15 +82,15 @@ class DetailsView extends StatelessWidget {
         ],
       ),
       child: GNav(
-          rippleColor: Colors.grey[300]!,
-          hoverColor: Colors.grey[100]!,
+          rippleColor: CustomColors.blue3.withOpacity(0.3),
+          hoverColor: CustomColors.blue3.withOpacity(0.1),
           gap: 8,
-          activeColor: Colors.black,
+          activeColor: Colors.white,
           iconSize: 24,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           duration: const Duration(milliseconds: 100),
-          tabBackgroundColor: Colors.grey[100]!,
-          color: Colors.black,
+          tabBackgroundColor: CustomColors.blue3.withOpacity(0.5),
+          color: Colors.white,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           tabs: const [
             GButton(icon: Icons.list, text: CustomTexts.list),

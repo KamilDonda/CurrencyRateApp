@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:currency_rate_app/constants/custom_colors.dart';
 import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,10 @@ class Chart extends StatelessWidget {
   const Chart({super.key, required this.currencies});
 
   static const List<Color> _gradientColors = [
-    Color(0xFF3F55B7),
-    Color(0xFF264DF3),
-    Color(0xFF1A2E85),
-    Color(0xFF041459),
+    CustomColors.blue1,
+    CustomColors.blue2,
+    CustomColors.blue3,
+    CustomColors.blue4,
   ];
 
   static const _xAxisReservedSize = 30.0;
@@ -85,7 +86,7 @@ class Chart extends StatelessWidget {
     if (value == 0 || value == currencies.length - 1) return Container();
 
     DateTime dateTime =
-        DateFormat("yyyy-MM-dd").parse(currencies[value.toInt()].date);
+        DateFormat("dd.MM.yyyy").parse(currencies[value.toInt()].date);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -139,10 +140,7 @@ class Chart extends StatelessWidget {
           sideTitles: SideTitles(showTitles: false),
         ),
       ),
-      borderData: FlBorderData(
-        show: false,
-        border: Border.all(color: const Color(0xff37434d)),
-      ),
+      borderData: FlBorderData(show: false),
       minX: 0,
       maxX: currencies.length.toDouble() - 1,
       minY: yMin - yInterval / 3,
@@ -191,11 +189,12 @@ class Chart extends StatelessWidget {
     );
   }
 
-  Positioned _yLabel(
-      {required String text,
-      double? top,
-      double? bottom,
-      required double textHeight}) {
+  Positioned _yLabel({
+    required String text,
+    double? top,
+    double? bottom,
+    required double textHeight,
+  }) {
     return Positioned(
       top: top,
       bottom: bottom,

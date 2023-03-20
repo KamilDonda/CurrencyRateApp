@@ -2,6 +2,7 @@ import 'package:currency_rate_app/model/currency.dart';
 import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/services/rest_api_service.dart';
 import 'package:flag/flag_enum.dart';
+import 'package:intl/intl.dart';
 
 class CurrencyDetailRepository {
   final _restApiService = RestApiService();
@@ -15,7 +16,9 @@ class CurrencyDetailRepository {
       for (var data in detailMid!.rates!) {
         if (detail!.rates!.any((e) => e.effectiveDate == data.effectiveDate)) {
           detailsList.add(CurrencyDetailCombined(
-            date: data.effectiveDate!,
+            date: DateFormat("dd.MM.yyyy").format(
+              DateFormat("yyyy-MM-dd").parse(data.effectiveDate!),
+            ),
             bid: detail.rates!
                 .firstWhere((e) => e.effectiveDate == data.effectiveDate)
                 .bid!,
@@ -40,7 +43,7 @@ class CurrencyDetailRepository {
     try {
       return [
         Currency(
-          name: "Dolar Amerykański",
+          name: "Dolar amerykański",
           countryCode: FlagsCode.US,
           code: "USD",
           value: usd!.rates!.first.mid!,

@@ -16,7 +16,7 @@ class CurrencyHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          padding: const EdgeInsets.only(right: 12, top: 12),
           child: Text(
             CustomTexts.update(currency),
             style: CustomTypography.updateStyle,

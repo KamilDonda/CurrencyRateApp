@@ -18,7 +18,7 @@ class ListTab extends StatelessWidget {
   Widget _list() {
     var reversedList = currencies!.reversed.toList();
 
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.all(4),
       itemCount: reversedList.length,
       itemBuilder: (_, index) => DetailCurrencyItem(
@@ -28,8 +28,9 @@ class ListTab extends StatelessWidget {
           ask: reversedList[index].ask,
           mid: reversedList[index].mid,
         ),
+        isEven: index % 2 == 0,
       ),
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      // separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 

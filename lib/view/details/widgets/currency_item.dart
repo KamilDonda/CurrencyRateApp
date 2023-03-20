@@ -14,7 +14,7 @@ class CurrencyItem extends StatelessWidget {
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(20),
       ),
       shadowColor: Colors.black,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

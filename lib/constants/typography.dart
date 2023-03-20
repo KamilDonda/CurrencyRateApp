@@ -8,6 +8,12 @@ class CustomTypography {
     color: const Color(0xFF4F4F4F),
   );
 
+  static TextStyle currencyMeanStyle = GoogleFonts.lato(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: const Color(0xFF343434),
+  );
+
   static TextStyle dateStyle = GoogleFonts.lato(
     fontSize: 15,
     fontWeight: FontWeight.w500,
@@ -16,8 +22,8 @@ class CustomTypography {
   );
 
   static TextStyle headerStyle = GoogleFonts.lato(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
     letterSpacing: 0.5,
     color: Colors.black,
   );
