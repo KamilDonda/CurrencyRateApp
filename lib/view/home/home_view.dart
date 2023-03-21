@@ -13,48 +13,51 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          CustomTexts.chooseCurrency,
-          style: CustomTypography.appbarStyle,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            CustomTexts.chooseCurrency,
+            style: CustomTypography.appbarStyle,
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: BlocBuilder<CurrencyCubit, List<Currency>?>(
-          builder: (_, currencies) {
-            if (currencies == null || currencies.isEmpty) {
-              return const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(),
+        body: SafeArea(
+          child: BlocBuilder<CurrencyCubit, List<Currency>?>(
+            builder: (_, currencies) {
+              if (currencies == null || currencies.isEmpty) {
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+              return ListView.builder(
+                padding: const EdgeInsets.all(4),
+                itemCount: currencies.length,
+                itemBuilder: (_, index) => GestureDetector(
+                  onTap: () {
+                    var code = currencies[index].code;
+                    context.read<CurrencyDetailCubit>().clear();
+                    context.read<CurrencyDetailCubit>().setCurrencyDetail(
+                          code.toLowerCase(),
+                        );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailsView(
+                          code: code,
+                          currency: currencies[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: CurrencyItem(currency: currencies[index]),
                 ),
               );
-            }
-            return ListView.builder(
-              padding: const EdgeInsets.all(4),
-              itemCount: currencies.length,
-              itemBuilder: (_, index) => GestureDetector(
-                onTap: () {
-                  var code = currencies[index].code;
-                  context.read<CurrencyDetailCubit>().clear();
-                  context.read<CurrencyDetailCubit>().setCurrencyDetail(
-                        code.toLowerCase(),
-                      );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DetailsView(
-                        code: code,
-                        currency: currencies[index],
-                      ),
-                    ),
-                  );
-                },
-                child: CurrencyItem(currency: currencies[index]),
-              ),
-            );
-          },
+            },
+          ),
         ),
       ),
     );
