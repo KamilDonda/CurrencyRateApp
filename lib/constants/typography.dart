@@ -55,12 +55,12 @@ class CustomTypography {
   static TextStyle currencyValueStyle = GoogleFonts.lato(
     fontWeight: FontWeight.w500,
     color: Colors.black,
-    fontSize: 36,
+    fontSize: 32,
     letterSpacing: 0.5,
   );
 
   static TextStyle currencyValueStyle2 = currencyValueStyle.copyWith(
-    fontSize: 28,
+    fontSize: 30,
     color: const Color(0xFF6B6B6B),
     fontWeight: FontWeight.w400,
   );

@@ -30,7 +30,6 @@ class ListTab extends StatelessWidget {
         ),
         isEven: index % 2 == 0,
       ),
-      // separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 

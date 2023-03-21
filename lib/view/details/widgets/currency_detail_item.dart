@@ -31,7 +31,7 @@ class DetailCurrencyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      color: isEven ? CustomColors.blue1.withOpacity(0.2) : Colors.white,
+      color: isEven ? CustomColors.itemRowColor : Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: items
