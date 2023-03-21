@@ -1,4 +1,4 @@
-import 'package:currency_rate_app/model/currency.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:floor/floor.dart';
 
 @dao

@@ -1,4 +1,4 @@
-import 'package:currency_rate_app/services/fetch_service.dart';
+import 'package:currency_rate_app/model/services/fetch_service.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';

@@ -1,8 +1,8 @@
 import 'package:currency_rate_app/constants/supported_currencies.dart';
-import 'package:currency_rate_app/database/database.dart';
-import 'package:currency_rate_app/model/currency.dart';
-import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
-import 'package:currency_rate_app/services/rest_api_service.dart';
+import 'package:currency_rate_app/model/database/database.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/model/services/rest_api_service.dart';
 import 'package:flag/flag_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';

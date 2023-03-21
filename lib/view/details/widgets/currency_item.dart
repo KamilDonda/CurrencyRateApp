@@ -1,5 +1,5 @@
 import 'package:currency_rate_app/constants/typography.dart';
-import 'package:currency_rate_app/model/currency.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';

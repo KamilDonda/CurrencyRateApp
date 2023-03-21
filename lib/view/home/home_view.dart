@@ -1,6 +1,6 @@
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
-import 'package:currency_rate_app/model/currency.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/details_view.dart';
