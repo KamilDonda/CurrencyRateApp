@@ -1,3 +1,4 @@
+import 'package:currency_rate_app/services/fetch_service.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
@@ -9,6 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'constants/custom_colors.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FetchService.fetchCurrencies();
+  FetchService.fetchLast30Values();
+
   runApp(const MyApp());
 }
 

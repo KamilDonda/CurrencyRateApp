@@ -23,10 +23,12 @@ class ListTab extends StatelessWidget {
       itemCount: reversedList.length,
       itemBuilder: (_, index) => DetailCurrencyItem(
         currency: CurrencyDetailCombined(
+          id: reversedList[index].id,
           date: reversedList[index].date,
           bid: reversedList[index].bid,
           ask: reversedList[index].ask,
           mid: reversedList[index].mid,
+          code: '', // TODO - this is only temporary
         ),
         isEven: index % 2 == 0,
       ),
