@@ -43,6 +43,7 @@ dependencies:
   fl_chart: ^0.61.0
   intl: ^0.18.0
   floor: ^1.4.1
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:
