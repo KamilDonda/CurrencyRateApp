@@ -1,5 +1,5 @@
-import 'package:currency_rate_app/model/currency.dart';
-import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_item.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
@@ -23,10 +23,12 @@ class ListTab extends StatelessWidget {
       itemCount: reversedList.length,
       itemBuilder: (_, index) => DetailCurrencyItem(
         currency: CurrencyDetailCombined(
+          id: reversedList[index].id,
           date: reversedList[index].date,
           bid: reversedList[index].bid,
           ask: reversedList[index].ask,
           mid: reversedList[index].mid,
+          code: '', // TODO - this is only temporary
         ),
         isEven: index % 2 == 0,
       ),

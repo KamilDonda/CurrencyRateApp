@@ -1,5 +1,5 @@
-import 'package:currency_rate_app/model/currency_detail/currency_detail.dart';
-import 'package:currency_rate_app/model/currency_detail/currency_detail_mid.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_mid.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

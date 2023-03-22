@@ -1,8 +1,8 @@
 import 'package:currency_rate_app/constants/custom_colors.dart';
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
-import 'package:currency_rate_app/model/currency.dart';
-import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
@@ -32,7 +32,6 @@ class DetailsView extends StatelessWidget {
               CustomTexts.details,
               style: CustomTypography.appbarStyle,
             ),
-            leading: const BackButton(),
             actions: [
               Container(
                 padding: const EdgeInsets.only(right: 12),

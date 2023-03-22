@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:currency_rate_app/constants/custom_colors.dart';
-import 'package:currency_rate_app/model/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
+import 'package:currency_rate_app/utils/date_converter.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<CurrencyDetailCombined> currencies;
@@ -85,12 +85,9 @@ class Chart extends StatelessWidget {
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     if (value == 0 || value == currencies.length - 1) return Container();
 
-    DateTime dateTime =
-        DateFormat("dd.MM.yyyy").parse(currencies[value.toInt()].date);
-
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: Text(DateFormat("dd.MM").format(dateTime),
+      child: Text(DateConverter.dd_MM(currencies[value.toInt()].date),
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 10,

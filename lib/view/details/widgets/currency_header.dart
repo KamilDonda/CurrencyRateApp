@@ -1,6 +1,6 @@
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
-import 'package:currency_rate_app/model/currency.dart';
+import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class CurrencyHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 12, top: 12),
           child: Text(
-            CustomTexts.update(currency),
+            CustomTexts.update(currency.date),
             style: CustomTypography.updateStyle,
           ),
         ),
@@ -30,7 +30,7 @@ class CurrencyHeader extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flag.fromCode(
+                Flag.fromString(
                   currency.countryCode,
                   width: 50,
                   height: 50,

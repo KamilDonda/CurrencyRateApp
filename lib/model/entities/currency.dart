@@ -1,9 +1,11 @@
-import 'package:flag/flag_enum.dart';
+import 'package:floor/floor.dart';
 
+@entity
 class Currency {
-  final String name;
-  final FlagsCode countryCode;
+  @primaryKey
   final String code;
+  final String name;
+  final String countryCode;
   final double value;
   final String date;
 
