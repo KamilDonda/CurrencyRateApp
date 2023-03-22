@@ -26,7 +26,7 @@ class CurrencyItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                Flag.fromCode(
+                Flag.fromString(
                   currency.countryCode,
                   width: 55,
                   height: 55,

@@ -87,7 +87,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Currency` (`code` TEXT NOT NULL, `name` TEXT NOT NULL, `countryCode` INTEGER NOT NULL, `value` REAL NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`code`))');
+            'CREATE TABLE IF NOT EXISTS `Currency` (`code` TEXT NOT NULL, `name` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `value` REAL NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`code`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `CurrencyDetailCombined` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `code` TEXT NOT NULL, `date` TEXT NOT NULL, `bid` REAL NOT NULL, `ask` REAL NOT NULL, `mid` REAL NOT NULL)');
 
@@ -120,7 +120,7 @@ class _$CurrencyDao extends CurrencyDao {
             (Currency item) => <String, Object?>{
                   'code': item.code,
                   'name': item.name,
-                  'countryCode': item.countryCode.index,
+                  'countryCode': item.countryCode,
                   'value': item.value,
                   'date': item.date
                 });
@@ -138,16 +138,16 @@ class _$CurrencyDao extends CurrencyDao {
     return _queryAdapter.queryList('SELECT * FROM Currency',
         mapper: (Map<String, Object?> row) => Currency(
             name: row['name'] as String,
-            countryCode: FlagsCode.values[row['countryCode'] as int],
+            countryCode: row['countryCode'] as String,
             code: row['code'] as String,
             value: row['value'] as double,
             date: row['date'] as String));
   }
 
   @override
-  Future<void> insertCurrency(List<Currency> currencies) async {
-    await _currencyInsertionAdapter.insertList(
-        currencies, OnConflictStrategy.replace);
+  Future<void> insertCurrency(Currency currency) async {
+    await _currencyInsertionAdapter.insert(
+        currency, OnConflictStrategy.replace);
   }
 }
 

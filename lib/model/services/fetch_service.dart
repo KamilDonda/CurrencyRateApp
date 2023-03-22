@@ -3,7 +3,6 @@ import 'package:currency_rate_app/model/database/database.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/model/services/rest_api_service.dart';
-import 'package:flag/flag_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
@@ -14,41 +13,19 @@ class FetchService {
   static Future<void> fetchCurrencies() async {
     final currencyDao = (await _database).currencyDao;
 
-    var usd = await _restApiService.getLastValue(SupportedCurrencies.usd);
-    var eur = await _restApiService.getLastValue(SupportedCurrencies.eur);
-    var gbp = await _restApiService.getLastValue(SupportedCurrencies.gbp);
-    var chf = await _restApiService.getLastValue(SupportedCurrencies.chf);
-
-    currencyDao.insertCurrency([
-      Currency(
-        name: "Dolar amerykański",
-        countryCode: FlagsCode.US,
-        code: "USD",
-        value: usd!.rates!.first.mid!,
-        date: usd.rates!.first.effectiveDate!.toString(),
-      ),
-      Currency(
-        name: "Euro",
-        countryCode: FlagsCode.EU,
-        code: "EUR",
-        value: eur!.rates!.first.mid!,
-        date: eur.rates!.first.effectiveDate!.toString(),
-      ),
-      Currency(
-        name: "Funt szterling",
-        countryCode: FlagsCode.GB,
-        code: "GBP",
-        value: gbp!.rates!.first.mid!,
-        date: gbp.rates!.first.effectiveDate!.toString(),
-      ),
-      Currency(
-        name: "Frank szwajcarski",
-        countryCode: FlagsCode.CH,
-        code: "CHF",
-        value: chf!.rates!.first.mid!,
-        date: chf.rates!.first.effectiveDate!.toString(),
-      ),
-    ]);
+    for (var code in SupportedCurrencies.currencies) {
+      var currency = await _restApiService.getLastValue(code);
+      var name = currency!.currency!;
+      currencyDao.insertCurrency(
+        Currency(
+          name: name.replaceFirst(name[0], name[0].toUpperCase()),
+          countryCode: code.substring(0, 2),
+          code: code,
+          value: currency.rates!.first.mid!,
+          date: currency.rates!.first.effectiveDate!.toString(),
+        ),
+      );
+    }
   }
 
   static Future<void> fetchLast30Values() async {

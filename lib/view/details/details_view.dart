@@ -32,7 +32,6 @@ class DetailsView extends StatelessWidget {
               CustomTexts.details,
               style: CustomTypography.appbarStyle,
             ),
-            leading: const BackButton(),
             actions: [
               Container(
                 padding: const EdgeInsets.only(right: 12),

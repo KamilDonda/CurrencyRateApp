@@ -1,10 +1,11 @@
 class CurrencyDetailMid {
+  String? currency;
   List<Rates>? rates;
-  String? error;
 
-  CurrencyDetailMid({this.rates});
+  CurrencyDetailMid({this.currency, this.rates});
 
   CurrencyDetailMid.fromJson(Map<String, dynamic> json) {
+    currency = json['currency'];
     if (json['rates'] != null) {
       rates = <Rates>[];
       json['rates'].forEach((v) {
@@ -15,6 +16,7 @@ class CurrencyDetailMid {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['currency'] = currency;
     if (rates != null) {
       data['rates'] = rates!.map((v) => v.toJson()).toList();
     }

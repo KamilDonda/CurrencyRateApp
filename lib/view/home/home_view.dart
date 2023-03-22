@@ -22,6 +22,7 @@ class HomeView extends StatelessWidget {
             CustomTexts.chooseCurrency,
             style: CustomTypography.appbarStyle,
           ),
+          automaticallyImplyLeading: false,
         ),
         body: SafeArea(
           child: BlocBuilder<CurrencyCubit, List<Currency>?>(
@@ -40,9 +41,7 @@ class HomeView extends StatelessWidget {
                   onTap: () {
                     var code = currencies[index].code;
                     context.read<CurrencyDetailCubit>().clear();
-                    context.read<CurrencyDetailCubit>().setCurrencyDetail(
-                          code.toLowerCase(),
-                        );
+                    context.read<CurrencyDetailCubit>().setCurrencyDetail(code);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

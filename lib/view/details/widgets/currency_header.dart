@@ -30,7 +30,7 @@ class CurrencyHeader extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flag.fromCode(
+                Flag.fromString(
                   currency.countryCode,
                   width: 50,
                   height: 50,

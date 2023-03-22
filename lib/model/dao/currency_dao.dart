@@ -7,5 +7,5 @@ abstract class CurrencyDao {
   Future<List<Currency>> getCurrencies();
 
   @Insert(onConflict: OnConflictStrategy.replace)
-  Future<void> insertCurrency(List<Currency> currencies);
+  Future<void> insertCurrency(Currency currency);
 }
