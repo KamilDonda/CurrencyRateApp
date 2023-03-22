@@ -18,7 +18,7 @@ class CurrencyHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 12, top: 12),
           child: Text(
-            CustomTexts.update(currency),
+            CustomTexts.update(currency.date),
             style: CustomTypography.updateStyle,
           ),
         ),

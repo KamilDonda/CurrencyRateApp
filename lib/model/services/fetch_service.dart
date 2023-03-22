@@ -3,8 +3,8 @@ import 'package:currency_rate_app/model/database/database.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/model/services/rest_api_service.dart';
+import 'package:currency_rate_app/utils/date_converter.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class FetchService {
   static final _restApiService = RestApiService();
@@ -22,7 +22,9 @@ class FetchService {
           countryCode: code.substring(0, 2),
           code: code,
           value: currency.rates!.first.mid!,
-          date: currency.rates!.first.effectiveDate!.toString(),
+          date: DateConverter.dd_MM_yyyy(
+            currency.rates!.first.effectiveDate!.toString(),
+          ),
         ),
       );
     }
@@ -43,9 +45,7 @@ class FetchService {
           detailsList.add(
             CurrencyDetailCombined(
               id: id++,
-              date: DateFormat("dd.MM.yyyy").format(
-                DateFormat("yyyy-MM-dd").parse(data.effectiveDate!),
-              ),
+              date: DateConverter.dd_MM_yyyy(data.effectiveDate!),
               bid: detail.rates!
                   .firstWhere((e) => e.effectiveDate == data.effectiveDate)
                   .bid!,
