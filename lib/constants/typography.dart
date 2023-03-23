@@ -85,4 +85,11 @@ class CustomTypography {
     color: Colors.white,
     letterSpacing: 0.5,
   );
+
+  static TextStyle dataNotFoundStyle = GoogleFonts.lato(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: const Color(0xFF4F4F4F),
+    letterSpacing: 0.5,
+  );
 }

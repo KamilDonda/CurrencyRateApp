@@ -1,6 +1,5 @@
 class CurrencyDetail {
   List<Rates>? rates;
-  String? error;
 
   CurrencyDetail({this.rates});
 
