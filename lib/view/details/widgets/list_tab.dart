@@ -3,6 +3,7 @@ import 'package:currency_rate_app/model/entities/currency_detail/currency_detail
 import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_item.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
+import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
 
 class ListTab extends StatelessWidget {
@@ -44,7 +45,7 @@ class ListTab extends StatelessWidget {
         const DetailCurrencyHeader(),
         Expanded(
           child: (currencies == null || currencies!.isEmpty)
-              ? const Center(child: CircularProgressIndicator())
+              ? const DataNotFound()
               : _list(),
         ),
       ],

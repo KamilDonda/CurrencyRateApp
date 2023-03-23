@@ -78,4 +78,18 @@ class CustomTypography {
     letterSpacing: 0.5,
     color: const Color(0xFF4F4F4F),
   );
+
+  static TextStyle snackBarStyle = GoogleFonts.lato(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+    letterSpacing: 0.5,
+  );
+
+  static TextStyle dataNotFoundStyle = GoogleFonts.lato(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: const Color(0xFF4F4F4F),
+    letterSpacing: 0.5,
+  );
 }

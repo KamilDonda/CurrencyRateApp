@@ -2,6 +2,7 @@ import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/widgets/chart.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
+import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
 
 class PlotTab extends StatelessWidget {
@@ -29,7 +30,7 @@ class PlotTab extends StatelessWidget {
         CurrencyHeader(currency: currency),
         const Divider(),
         (currencies == null || currencies!.isEmpty)
-            ? const Expanded(child: Center(child: CircularProgressIndicator()))
+            ? const Expanded(child: DataNotFound())
             : _chart(currencies!),
       ],
     );

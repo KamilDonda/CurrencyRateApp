@@ -5,6 +5,7 @@ import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/details_view.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_item.dart';
+import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,11 +29,7 @@ class HomeView extends StatelessWidget {
           child: BlocBuilder<CurrencyCubit, List<Currency>?>(
             builder: (_, currencies) {
               if (currencies == null || currencies.isEmpty) {
-                return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                return const Expanded(child: DataNotFound());
               }
               return ListView.builder(
                 padding: const EdgeInsets.all(4),
