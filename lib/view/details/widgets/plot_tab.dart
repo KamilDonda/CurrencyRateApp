@@ -30,7 +30,7 @@ class PlotTab extends StatelessWidget {
         CurrencyHeader(currency: currency),
         const Divider(),
         (currencies == null || currencies!.isEmpty)
-            ? const Expanded(child: DataNotFound())
+            ? const DataNotFound()
             : _chart(currencies!),
       ],
     );

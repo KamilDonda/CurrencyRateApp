@@ -19,19 +19,21 @@ class ListTab extends StatelessWidget {
   Widget _list() {
     var reversedList = currencies!.reversed.toList();
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(4),
-      itemCount: reversedList.length,
-      itemBuilder: (_, index) => DetailCurrencyItem(
-        currency: CurrencyDetailCombined(
-          id: reversedList[index].id,
-          date: reversedList[index].date,
-          bid: reversedList[index].bid,
-          ask: reversedList[index].ask,
-          mid: reversedList[index].mid,
-          code: '', // TODO - this is only temporary
+    return Expanded(
+      child: ListView.builder(
+        padding: const EdgeInsets.all(4),
+        itemCount: reversedList.length,
+        itemBuilder: (_, index) => DetailCurrencyItem(
+          currency: CurrencyDetailCombined(
+            id: reversedList[index].id,
+            date: reversedList[index].date,
+            bid: reversedList[index].bid,
+            ask: reversedList[index].ask,
+            mid: reversedList[index].mid,
+            code: '', // TODO - this is only temporary
+          ),
+          isEven: index % 2 == 0,
         ),
-        isEven: index % 2 == 0,
       ),
     );
   }
@@ -43,11 +45,9 @@ class ListTab extends StatelessWidget {
         CurrencyHeader(currency: currency),
         const SizedBox(height: 8),
         const DetailCurrencyHeader(),
-        Expanded(
-          child: (currencies == null || currencies!.isEmpty)
-              ? const DataNotFound()
-              : _list(),
-        ),
+        (currencies == null || currencies!.isEmpty)
+            ? const DataNotFound()
+            : _list(),
       ],
     );
   }

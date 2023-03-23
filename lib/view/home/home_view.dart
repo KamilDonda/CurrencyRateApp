@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
           child: BlocBuilder<CurrencyCubit, List<Currency>?>(
             builder: (_, currencies) {
               if (currencies == null || currencies.isEmpty) {
-                return const Expanded(child: DataNotFound());
+                return const DataNotFound();
               }
               return ListView.builder(
                 padding: const EdgeInsets.all(4),

@@ -157,10 +157,8 @@ class _LoadingViewState extends State<LoadingView> {
           ),
         ),
         body: const SafeArea(
-          child: Expanded(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
         ),
       ),
