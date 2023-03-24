@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
@@ -19,6 +20,9 @@ class ListTab extends StatelessWidget {
   Widget _list() {
     var reversedList = currencies!.reversed.toList();
 
+    var minimum = reversedList.map((e) => e.mid).min;
+    var maximum = reversedList.map((e) => e.mid).max;
+
     return Expanded(
       child: ListView.builder(
         padding: const EdgeInsets.all(4),
@@ -33,6 +37,8 @@ class ListTab extends StatelessWidget {
             code: '', // TODO - this is only temporary
           ),
           isEven: index % 2 == 0,
+          isMinimum: reversedList[index].mid == minimum,
+          isMaximum: reversedList[index].mid == maximum,
         ),
       ),
     );
