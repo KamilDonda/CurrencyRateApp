@@ -7,11 +7,15 @@ import 'package:flutter/material.dart';
 class DetailCurrencyItem extends StatelessWidget {
   final CurrencyDetailCombined currency;
   final bool isEven;
+  final bool isMinimum;
+  final bool isMaximum;
 
   DetailCurrencyItem({
     Key? key,
     required this.currency,
     required this.isEven,
+    required this.isMinimum,
+    required this.isMaximum,
   }) : super(key: key);
 
   late var items = [
@@ -22,16 +26,29 @@ class DetailCurrencyItem extends StatelessWidget {
   ];
 
   TextStyle _textStyle(int index, int max) {
-    if (index == 0) return CustomTypography.dateStyle;
-    if (index == max) return CustomTypography.currencyMeanStyle;
-    return CustomTypography.currencyStyle;
+    TextStyle style = CustomTypography.currencyStyle;
+    if (index == 0) style = CustomTypography.dateStyle;
+    if (index == max) style = CustomTypography.currencyMeanStyle;
+
+    if (isMinimum || isMaximum) {
+      return style.copyWith(
+        color: isMinimum ? CustomColors.minColor : CustomColors.maxColor,
+      );
+    }
+    return style;
+  }
+
+  Color _bgColor() {
+    if (isMinimum) return CustomColors.minRowColor;
+    if (isMaximum) return CustomColors.maxRowColor;
+    return isEven ? CustomColors.itemRowColor : Colors.white;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      color: isEven ? CustomColors.itemRowColor : Colors.white,
+      color: _bgColor(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: items
