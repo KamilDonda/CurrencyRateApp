@@ -184,9 +184,7 @@ class Chart extends StatelessWidget {
           ),
           barWidth: 3,
           isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: false,
-          ),
+          dotData: FlDotData(show: false),
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(

@@ -1,9 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
-import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
 import 'package:currency_rate_app/view/details/widgets/currency_detail_item.dart';
-import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
 import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
 
@@ -39,15 +37,8 @@ class ListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CurrencyHeader(currency: currency),
-        const SizedBox(height: 8),
-        const DetailCurrencyHeader(),
-        (currencies == null || currencies!.isEmpty)
-            ? const DataNotFound()
-            : _list(),
-      ],
-    );
+    return (currencies == null || currencies!.isEmpty)
+        ? const DataNotFound()
+        : _list();
   }
 }
