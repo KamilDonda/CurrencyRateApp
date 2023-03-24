@@ -4,7 +4,6 @@ import 'package:currency_rate_app/model/dao/currency_dao.dart';
 import 'package:currency_rate_app/model/dao/currency_detail_dao.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
-import 'package:flag/flag_enum.dart';
 import 'package:floor/floor.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 

@@ -5,7 +5,6 @@ import 'package:currency_rate_app/model/entities/currency_detail/currency_detail
 import 'package:currency_rate_app/model/services/rest_api_service.dart';
 import 'package:currency_rate_app/utils/date_converter.dart';
 import 'package:currency_rate_app/utils/fetch_status.dart';
-import 'package:flutter/cupertino.dart';
 
 class FetchService {
   static final _restApiService = RestApiService();
@@ -66,9 +65,7 @@ class FetchService {
             );
           }
         }
-        debugPrint("List size: ${detailsList.length}");
         currencyDetailDao.insertCurrencyDetail(detailsList);
-        debugPrint("Inserted $code values");
       } catch (e) {
         return FetchStatusFailure();
       }

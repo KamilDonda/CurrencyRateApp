@@ -28,14 +28,7 @@ class ListTab extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         itemCount: reversedList.length,
         itemBuilder: (_, index) => DetailCurrencyItem(
-          currency: CurrencyDetailCombined(
-            id: reversedList[index].id,
-            date: reversedList[index].date,
-            bid: reversedList[index].bid,
-            ask: reversedList[index].ask,
-            mid: reversedList[index].mid,
-            code: '', // TODO - this is only temporary
-          ),
+          currency: reversedList[index],
           isEven: index % 2 == 0,
           isMinimum: reversedList[index].mid == minimum,
           isMaximum: reversedList[index].mid == maximum,

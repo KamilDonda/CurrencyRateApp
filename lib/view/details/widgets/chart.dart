@@ -45,14 +45,9 @@ class Chart extends StatelessWidget {
             children: [
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Container(
+                child: SizedBox(
                   width: 1000,
                   height: _containerHeight,
-                  padding: const EdgeInsets.only(
-                      // right: 16,
-                      // left: 10,
-                      // top: 10,
-                      ),
                   child: LineChart(_lineChartData(currencies, yInterval)),
                 ),
               ),
