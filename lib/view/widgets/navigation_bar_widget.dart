@@ -40,11 +40,12 @@ class NavigationBarWidget extends StatelessWidget {
               ],
             ),
           ),
-        Container(
-          width: 1,
-          height: 40,
-          color: Colors.white38,
-        ),
+        if (isTopBar)
+          Container(
+            width: 1,
+            height: 40,
+            color: Colors.white38,
+          ),
         Expanded(
           child: Container(
             color: CustomColors.blue1,

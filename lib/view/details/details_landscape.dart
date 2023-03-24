@@ -1,7 +1,6 @@
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
-import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
 import 'package:currency_rate_app/view/details/widgets/plot_tab.dart';
 import 'package:currency_rate_app/view/widgets/navigation_bar_widget.dart';
@@ -31,32 +30,21 @@ class DetailsLandscape extends StatelessWidget {
       appBar: AppBar(
         title: NavigationBarWidget(index: index, isTopBar: true, code: code),
       ),
-      body: SafeArea(
-        child: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>?>(
-          builder: (_, currencies) {
-            return Stack(
-              children: [
-                Offstage(
-                  offstage: index != 0,
-                  child: Column(
-                    children: [
-                      const DetailCurrencyHeader(),
-                      ListTab(currency: currency, currencies: currencies),
-                    ],
-                  ),
-                ),
-                Offstage(
-                  offstage: index != 1,
-                  child: Column(
-                    children: [
-                      PlotTab(currency: currency, currencies: currencies),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+      body: BlocBuilder<CurrencyDetailCubit, List<CurrencyDetailCombined>?>(
+        builder: (_, currencies) {
+          return Stack(
+            children: [
+              Offstage(
+                offstage: index != 0,
+                child: ListTab(currency: currency, currencies: currencies),
+              ),
+              Offstage(
+                offstage: index != 1,
+                child: PlotTab(currency: currency, currencies: currencies),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

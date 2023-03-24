@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:collection/collection.dart';
 import 'package:currency_rate_app/constants/custom_colors.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
@@ -24,12 +26,31 @@ class Chart extends StatelessWidget {
     CustomColors.blue4,
   ];
 
-  static const _xAxisReservedSize = 30.0;
-  static const _containerHeight = 550.0;
-  static const _textHeight = 30.0;
+  final _xAxisReservedSize = 30.0;
+  final _textHeight = 30.0;
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    final appBarHeight = AppBar().preferredSize.height;
+    final statusBarHeight = MediaQueryData.fromWindow(window).padding.top;
+    final systemNavigationBarHeight =
+        MediaQueryData.fromWindow(window).padding.bottom;
+
+    double containerHeight;
+
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    if (currentOrientation == Orientation.portrait) {
+      containerHeight = deviceHeight -
+          statusBarHeight -
+          appBarHeight -
+          appBarHeight -
+          systemNavigationBarHeight -
+          100;
+    } else {
+      containerHeight = deviceHeight - appBarHeight - 10;
+    }
+
     double dy = max - min;
     double yInterval = dy / 3;
 
@@ -38,44 +59,41 @@ class Chart extends StatelessWidget {
         overscroll.disallowIndicator();
         return true;
       },
-      child: Expanded(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: 1000,
-                  height: _containerHeight,
-                  child: LineChart(_lineChartData(currencies, yInterval)),
-                ),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                width: 1000,
+                height: containerHeight,
+                child: LineChart(_lineChartData(currencies, yInterval)),
               ),
-              _yLabel(
-                  text: (max + yInterval / 3).toStringAsFixed(2),
-                  top: 0,
-                  textHeight: _textHeight),
-              _yLabel(
-                  text: (max - dy / 4).toStringAsFixed(2),
-                  top: (_containerHeight - _xAxisReservedSize) / 4 -
-                      _textHeight / 2,
-                  textHeight: _textHeight),
-              _yLabel(
-                  text: (max - dy / 2).toStringAsFixed(2),
-                  top:
-                      (_containerHeight - _xAxisReservedSize - _textHeight) / 2,
-                  textHeight: _textHeight),
-              _yLabel(
-                  text: (max - dy * 3 / 4).toStringAsFixed(2),
-                  top: (_containerHeight - _xAxisReservedSize) * 3 / 4 -
-                      _textHeight / 2,
-                  textHeight: _textHeight),
-              _yLabel(
-                  text: (min - yInterval / 3).toStringAsFixed(2),
-                  bottom: _xAxisReservedSize / 2 + _textHeight / 2,
-                  textHeight: _textHeight),
-            ],
-          ),
+            ),
+            _yLabel(
+                text: (max + yInterval / 3).toStringAsFixed(2),
+                top: 0,
+                textHeight: _textHeight),
+            _yLabel(
+                text: (max - dy / 4).toStringAsFixed(2),
+                top: (containerHeight - _xAxisReservedSize) / 4 -
+                    _textHeight / 2,
+                textHeight: _textHeight),
+            _yLabel(
+                text: (max - dy / 2).toStringAsFixed(2),
+                top: (containerHeight - _xAxisReservedSize - _textHeight) / 2,
+                textHeight: _textHeight),
+            _yLabel(
+                text: (max - dy * 3 / 4).toStringAsFixed(2),
+                top: (containerHeight - _xAxisReservedSize) * 3 / 4 -
+                    _textHeight / 2,
+                textHeight: _textHeight),
+            _yLabel(
+                text: (min - yInterval / 3).toStringAsFixed(2),
+                bottom: _xAxisReservedSize / 2 + _textHeight / 2,
+                textHeight: _textHeight),
+          ],
         ),
       ),
     );

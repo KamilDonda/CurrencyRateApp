@@ -3,8 +3,6 @@ import 'package:currency_rate_app/constants/typography.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
-import 'package:currency_rate_app/view/details/widgets/currency_detail_header.dart';
-import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
 import 'package:currency_rate_app/view/details/widgets/list_tab.dart';
 import 'package:currency_rate_app/view/details/widgets/plot_tab.dart';
 import 'package:currency_rate_app/view/widgets/navigation_bar_widget.dart';
@@ -60,24 +58,11 @@ class DetailsPortrait extends StatelessWidget {
           children: [
             Offstage(
               offstage: index != 0,
-              child: Column(
-                children: [
-                  CurrencyHeader(currency: currency),
-                  const SizedBox(height: 8),
-                  const DetailCurrencyHeader(),
-                  ListTab(currency: currency, currencies: currencies),
-                ],
-              ),
+              child: ListTab(currency: currency, currencies: currencies),
             ),
             Offstage(
               offstage: index != 1,
-              child: Column(
-                children: [
-                  CurrencyHeader(currency: currency),
-                  const Divider(),
-                  PlotTab(currency: currency, currencies: currencies),
-                ],
-              ),
+              child: PlotTab(currency: currency, currencies: currencies),
             ),
           ],
         );
