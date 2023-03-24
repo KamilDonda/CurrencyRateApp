@@ -7,8 +7,15 @@ import 'package:flutter/material.dart';
 
 class Chart extends StatelessWidget {
   final List<CurrencyDetailCombined> currencies;
+  final double min;
+  final double max;
 
-  const Chart({super.key, required this.currencies});
+  const Chart({
+    super.key,
+    required this.currencies,
+    required this.min,
+    required this.max,
+  });
 
   static const List<Color> _gradientColors = [
     CustomColors.blue1,
@@ -23,9 +30,7 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double yMin = currencies.map((e) => e.mid).min;
-    double yMax = currencies.map((e) => e.mid).max;
-    double dy = yMax - yMin;
+    double dy = max - min;
     double yInterval = dy / 3;
 
     return NotificationListener<OverscrollIndicatorNotification>(
@@ -48,31 +53,30 @@ class Chart extends StatelessWidget {
                       // left: 10,
                       // top: 10,
                       ),
-                  child: LineChart(
-                      _lineChartData(currencies, yMin, yMax, yInterval)),
+                  child: LineChart(_lineChartData(currencies, yInterval)),
                 ),
               ),
               _yLabel(
-                  text: (yMax + yInterval / 3).toStringAsFixed(2),
+                  text: (max + yInterval / 3).toStringAsFixed(2),
                   top: 0,
                   textHeight: _textHeight),
               _yLabel(
-                  text: (yMax - dy / 4).toStringAsFixed(2),
+                  text: (max - dy / 4).toStringAsFixed(2),
                   top: (_containerHeight - _xAxisReservedSize) / 4 -
                       _textHeight / 2,
                   textHeight: _textHeight),
               _yLabel(
-                  text: (yMax - dy / 2).toStringAsFixed(2),
+                  text: (max - dy / 2).toStringAsFixed(2),
                   top:
                       (_containerHeight - _xAxisReservedSize - _textHeight) / 2,
                   textHeight: _textHeight),
               _yLabel(
-                  text: (yMax - dy * 3 / 4).toStringAsFixed(2),
+                  text: (max - dy * 3 / 4).toStringAsFixed(2),
                   top: (_containerHeight - _xAxisReservedSize) * 3 / 4 -
                       _textHeight / 2,
                   textHeight: _textHeight),
               _yLabel(
-                  text: (yMin - yInterval / 3).toStringAsFixed(2),
+                  text: (min - yInterval / 3).toStringAsFixed(2),
                   bottom: _xAxisReservedSize / 2 + _textHeight / 2,
                   textHeight: _textHeight),
             ],
@@ -82,21 +86,36 @@ class Chart extends StatelessWidget {
     );
   }
 
+  Color _textColor(bool isMin, bool isMax) {
+    if (isMin) return CustomColors.minColor;
+    if (isMax) return CustomColors.maxColor;
+    return Colors.black;
+  }
+
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     if (value == 0 || value == currencies.length - 1) return Container();
+    var isMin = currencies
+        .where((e) => e.mid == min)
+        .toList()
+        .contains(currencies[value.toInt()]);
+    var isMax = currencies
+        .where((e) => e.mid == max)
+        .toList()
+        .contains(currencies[value.toInt()]);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
       child: Text(DateConverter.dd_MM(currencies[value.toInt()].date),
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 10,
+            color: _textColor(isMin, isMax),
           )),
     );
   }
 
-  LineChartData _lineChartData(List<CurrencyDetailCombined> currencies,
-      double yMin, double yMax, double yInterval) {
+  LineChartData _lineChartData(
+      List<CurrencyDetailCombined> currencies, double yInterval) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -140,8 +159,8 @@ class Chart extends StatelessWidget {
       borderData: FlBorderData(show: false),
       minX: 0,
       maxX: currencies.length.toDouble() - 1,
-      minY: yMin - yInterval / 3,
-      maxY: yMax + yInterval / 3,
+      minY: min - yInterval / 3,
+      maxY: max + yInterval / 3,
       lineTouchData: LineTouchData(
         enabled: true,
         touchTooltipData: LineTouchTooltipData(
