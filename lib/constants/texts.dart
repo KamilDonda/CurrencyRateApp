@@ -8,6 +8,10 @@ class CustomTexts {
   static const String unexpectedError = "Nieoczekiwany błąd";
   static const String dataNotFound = "Nie znaleziono danych";
   static const String lastKnownData = "Wyświetlono ostatnio zapisane dane";
+  static const String date = "Data";
+  static const String buy = "Kupno";
+  static const String sell = "Sprzedaż";
+  static const String mean = "Średnia";
 
   static String update(String date) => "Aktualizacja:     $date";
 }

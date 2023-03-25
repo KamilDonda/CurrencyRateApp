@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/view/details/widgets/chart.dart';
@@ -20,19 +21,31 @@ class PlotTab extends StatelessWidget {
     data.addAll(currencies);
     data.insert(0, currencies.first);
     data.add(currencies.last);
-    return Chart(currencies: data);
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (OverscrollIndicatorNotification overscroll) {
+        overscroll.disallowIndicator();
+        return true;
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CurrencyHeader(currency: currency),
+            const Divider(),
+            Chart(
+              currencies: data,
+              min: currencies.map((e) => e.mid).min,
+              max: currencies.map((e) => e.mid).max,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CurrencyHeader(currency: currency),
-        const Divider(),
-        (currencies == null || currencies!.isEmpty)
-            ? const DataNotFound()
-            : _chart(currencies!),
-      ],
-    );
+    return (currencies == null || currencies!.isEmpty)
+        ? const DataNotFound()
+        : _chart(currencies!);
   }
 }
