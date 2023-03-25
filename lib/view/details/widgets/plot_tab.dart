@@ -21,17 +21,23 @@ class PlotTab extends StatelessWidget {
     data.addAll(currencies);
     data.insert(0, currencies.first);
     data.add(currencies.last);
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          CurrencyHeader(currency: currency),
-          const Divider(),
-          Chart(
-            currencies: data,
-            min: currencies.map((e) => e.mid).min,
-            max: currencies.map((e) => e.mid).max,
-          ),
-        ],
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (OverscrollIndicatorNotification overscroll) {
+        overscroll.disallowIndicator();
+        return true;
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CurrencyHeader(currency: currency),
+            const Divider(),
+            Chart(
+              currencies: data,
+              min: currencies.map((e) => e.mid).min,
+              max: currencies.map((e) => e.mid).max,
+            ),
+          ],
+        ),
       ),
     );
   }

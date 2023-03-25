@@ -31,25 +31,33 @@ class HomeView extends StatelessWidget {
               if (currencies == null || currencies.isEmpty) {
                 return const DataNotFound();
               }
-              return ListView.builder(
-                padding: const EdgeInsets.all(4),
-                itemCount: currencies.length,
-                itemBuilder: (_, index) => GestureDetector(
-                  onTap: () {
-                    var code = currencies[index].code;
-                    context.read<CurrencyDetailCubit>().clear();
-                    context.read<CurrencyDetailCubit>().setCurrencyDetail(code);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailsView(
-                          code: code,
-                          currency: currencies[index],
+              return NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (OverscrollIndicatorNotification overscroll) {
+                  overscroll.disallowIndicator();
+                  return true;
+                },
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(4),
+                  itemCount: currencies.length,
+                  itemBuilder: (_, index) => GestureDetector(
+                    onTap: () {
+                      var code = currencies[index].code;
+                      context.read<CurrencyDetailCubit>().clear();
+                      context
+                          .read<CurrencyDetailCubit>()
+                          .setCurrencyDetail(code);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailsView(
+                            code: code,
+                            currency: currencies[index],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: CurrencyItem(currency: currencies[index]),
+                      );
+                    },
+                    child: CurrencyItem(currency: currencies[index]),
+                  ),
                 ),
               );
             },

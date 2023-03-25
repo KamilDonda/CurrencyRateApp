@@ -127,6 +127,18 @@ class Chart extends StatelessWidget {
     );
   }
 
+  Color _dotColor(int i) {
+    if (currencies[i].mid == min) return CustomColors.minColor;
+    if (currencies[i].mid == max) return CustomColors.maxColor;
+    return Colors.white;
+  }
+
+  Color _lineColor(int i) {
+    if (currencies[i].mid == min) return CustomColors.minColor.withOpacity(0.8);
+    if (currencies[i].mid == max) return CustomColors.maxColor.withOpacity(0.8);
+    return CustomColors.blue5.withOpacity(0.3);
+  }
+
   LineChartData _lineChartData(
       List<CurrencyDetailCombined> currencies, double yInterval) {
     return LineChartData(
@@ -176,6 +188,29 @@ class Chart extends StatelessWidget {
       maxY: max + yInterval / 3,
       lineTouchData: LineTouchData(
         enabled: true,
+        getTouchedSpotIndicator:
+            (LineChartBarData barData, List<int> spotIndexes) {
+          return spotIndexes.map(
+            (index) {
+              return TouchedSpotIndicatorData(
+                FlLine(color: _lineColor(index)),
+                FlDotData(
+                  show: true,
+                  getDotPainter: (spot, percent, barData, index) =>
+                      FlDotCirclePainter(
+                    radius: (spot.x.toInt() == 0 ||
+                            spot.x.toInt() == currencies.length - 1)
+                        ? 0
+                        : 5,
+                    color: _dotColor(spot.x.toInt()),
+                    strokeWidth: 2,
+                    strokeColor: Colors.black,
+                  ),
+                ),
+              );
+            },
+          ).toList();
+        },
         touchTooltipData: LineTouchTooltipData(
           tooltipBgColor: Colors.grey.withOpacity(0.8),
           getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
@@ -202,7 +237,26 @@ class Chart extends StatelessWidget {
           ),
           barWidth: 3,
           isStrokeCapRound: true,
-          dotData: FlDotData(show: false),
+          dotData: FlDotData(
+            show: true,
+            checkToShowDot: (spot, barData) {
+              return currencies[spot.x.toInt()].mid == min ||
+                  currencies[spot.x.toInt()].mid == max;
+            },
+            getDotPainter: (spot, percent, barData, index) {
+              return FlDotCirclePainter(
+                radius: (spot.x.toInt() == 0 ||
+                        spot.x.toInt() == currencies.length - 1)
+                    ? 0
+                    : 6,
+                color: currencies[spot.x.toInt()].mid == min
+                    ? CustomColors.minColor
+                    : CustomColors.maxColor,
+                strokeWidth: 2,
+                strokeColor: Colors.black,
+              );
+            },
+          ),
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(

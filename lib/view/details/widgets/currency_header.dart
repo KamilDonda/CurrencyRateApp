@@ -14,6 +14,7 @@ class CurrencyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 92,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -24,38 +25,41 @@ class CurrencyHeader extends StatelessWidget {
               style: CustomTypography.updateStyle,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Container(
-              color: Colors.transparent,
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flag.fromString(
-                    currency.countryCode,
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.fitWidth,
-                    flagSize: FlagSize.size_4x3,
-                  ),
-                  Text(
-                    currency.code,
-                    textAlign: TextAlign.center,
-                    style: CustomTypography.codeStyle,
-                  ),
-                  Text(
-                    currency.name,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: CustomTypography.currencyNameHeaderStyle,
-                  ),
-                  Text(
-                    currency.value.toStringAsFixed(2),
-                    textAlign: TextAlign.center,
-                    style: CustomTypography.currencyValueHeaderStyle,
-                  ),
-                ],
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                color: Colors.transparent,
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flag.fromString(
+                      currency.countryCode,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.fitWidth,
+                      flagSize: FlagSize.size_4x3,
+                    ),
+                    Text(
+                      currency.code,
+                      textAlign: TextAlign.center,
+                      style: CustomTypography.codeStyle,
+                    ),
+                    Text(
+                      currency.name,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: CustomTypography.currencyNameHeaderStyle,
+                    ),
+                    Text(
+                      currency.value.toStringAsFixed(2),
+                      textAlign: TextAlign.center,
+                      style: CustomTypography.currencyValueHeaderStyle,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

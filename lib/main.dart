@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: CustomColors.blue1,
           ),
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: CustomColors.blue5),
         ),
         home: const LoadingView(),
       ),
