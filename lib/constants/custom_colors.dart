@@ -11,4 +11,5 @@ class CustomColors {
   static const Color maxRowColor = Color(0xFFE6FFE6);
   static const Color minColor = Color(0xFFE80000);
   static const Color maxColor = Color(0xFF008633);
+  static const Color bgColor = Color(0xFFFAFAFA);
 }

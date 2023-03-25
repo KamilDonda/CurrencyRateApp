@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:currency_rate_app/constants/custom_colors.dart';
 import 'package:currency_rate_app/constants/texts.dart';
 import 'package:currency_rate_app/constants/typography.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,14 @@ class DetailCurrencyHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(4),
+      decoration: const BoxDecoration(color: CustomColors.bgColor, boxShadow: [
+        BoxShadow(
+          color: Colors.black26,
+          offset: Offset(0, 3),
+          blurRadius: 4,
+        ),
+      ]),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: headers

@@ -6,6 +6,7 @@ import 'package:currency_rate_app/view/details/widgets/currency_detail_item.dart
 import 'package:currency_rate_app/view/details/widgets/currency_header.dart';
 import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class ListTab extends StatelessWidget {
   final Currency currency;
@@ -28,17 +29,19 @@ class ListTab extends StatelessWidget {
         children: [
           CurrencyHeader(currency: currency),
           const SizedBox(height: 8),
-          const DetailCurrencyHeader(),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(4),
-            itemCount: reversedList.length,
-            itemBuilder: (_, index) => DetailCurrencyItem(
-              currency: reversedList[index],
-              isEven: index % 2 == 0,
-              isMinimum: reversedList[index].mid == minimum,
-              isMaximum: reversedList[index].mid == maximum,
+          StickyHeader(
+            header: const DetailCurrencyHeader(),
+            content: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(4),
+              itemCount: reversedList.length,
+              itemBuilder: (_, index) => DetailCurrencyItem(
+                currency: reversedList[index],
+                isEven: index % 2 == 0,
+                isMinimum: reversedList[index].mid == minimum,
+                isMaximum: reversedList[index].mid == maximum,
+              ),
             ),
           ),
         ],

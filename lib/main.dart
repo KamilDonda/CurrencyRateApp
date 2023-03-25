@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             backgroundColor: CustomColors.blue1,
           ),
+          scaffoldBackgroundColor: CustomColors.bgColor,
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: CustomColors.blue5),
