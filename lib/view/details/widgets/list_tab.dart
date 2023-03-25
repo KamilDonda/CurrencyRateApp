@@ -34,7 +34,8 @@ class ListTab extends StatelessWidget {
             content: ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(4),
+              padding:
+                  const EdgeInsets.only(bottom: 4, top: 0, left: 4, right: 4),
               itemCount: reversedList.length,
               itemBuilder: (_, index) => DetailCurrencyItem(
                 currency: reversedList[index],

@@ -19,7 +19,7 @@ class DetailCurrencyHeader extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(color: CustomColors.bgColor, boxShadow: [
         BoxShadow(
-          color: Colors.black26,
+          color: Colors.black12,
           offset: Offset(0, 3),
           blurRadius: 4,
         ),
