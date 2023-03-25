@@ -52,7 +52,11 @@ class Chart extends StatelessWidget {
     }
 
     double dy = max - min;
-    double yInterval = dy / 3;
+    double yInterval = dy / 4;
+
+    final minOffset = -yInterval;
+    final maxOffset = yInterval;
+    var margin = (containerHeight - _xAxisReservedSize) / 6;
 
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {
@@ -68,31 +72,36 @@ class Chart extends StatelessWidget {
               child: SizedBox(
                 width: 1000,
                 height: containerHeight,
-                child: LineChart(_lineChartData(currencies, yInterval)),
+                child:
+                    LineChart(_lineChartData(currencies, minOffset, maxOffset)),
               ),
             ),
             _yLabel(
-                text: (max + yInterval / 3).toStringAsFixed(2),
-                top: 0,
-                textHeight: _textHeight),
+              text: (max).toStringAsFixed(2),
+              top: margin - _textHeight / 2,
+            ),
             _yLabel(
-                text: (max - dy / 4).toStringAsFixed(2),
-                top: (containerHeight - _xAxisReservedSize) / 4 -
-                    _textHeight / 2,
-                textHeight: _textHeight),
+              text: (min + dy / 2).toStringAsFixed(2),
+              top: (containerHeight - _xAxisReservedSize - _textHeight) / 2,
+            ),
             _yLabel(
-                text: (max - dy / 2).toStringAsFixed(2),
-                top: (containerHeight - _xAxisReservedSize - _textHeight) / 2,
-                textHeight: _textHeight),
+              text: (min).toStringAsFixed(2),
+              bottom: _xAxisReservedSize + margin - _textHeight / 2,
+            ),
             _yLabel(
-                text: (max - dy * 3 / 4).toStringAsFixed(2),
-                top: (containerHeight - _xAxisReservedSize) * 3 / 4 -
-                    _textHeight / 2,
-                textHeight: _textHeight),
+              text: (min + dy * 3 / 4).toStringAsFixed(2),
+              top: margin -
+                  _textHeight / 2 +
+                  (containerHeight - _xAxisReservedSize - _textHeight) *
+                      (3 / 16),
+            ),
             _yLabel(
-                text: (min - yInterval / 3).toStringAsFixed(2),
-                bottom: _xAxisReservedSize / 2 + _textHeight / 2,
-                textHeight: _textHeight),
+              text: (min + dy * 1 / 4).toStringAsFixed(2),
+              top: margin -
+                  _textHeight / 2 +
+                  (containerHeight - _xAxisReservedSize - _textHeight) *
+                      (9 / 16),
+            ),
           ],
         ),
       ),
@@ -139,8 +148,18 @@ class Chart extends StatelessWidget {
     return CustomColors.blue5.withOpacity(0.3);
   }
 
-  LineChartData _lineChartData(
-      List<CurrencyDetailCombined> currencies, double yInterval) {
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
+    const style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 5,
+    );
+
+    return Text(value.toStringAsFixed(3),
+        style: style, textAlign: TextAlign.left);
+  }
+
+  LineChartData _lineChartData(List<CurrencyDetailCombined> currencies,
+      double minOffset, double maxOffset) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -178,14 +197,19 @@ class Chart extends StatelessWidget {
           ),
         ),
         leftTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          sideTitles: SideTitles(
+            showTitles: false,
+            interval: 0.005,
+            getTitlesWidget: leftTitleWidgets,
+            reservedSize: 16,
+          ),
         ),
       ),
       borderData: FlBorderData(show: false),
       minX: 0,
       maxX: currencies.length.toDouble() - 1,
-      minY: min - yInterval / 3,
-      maxY: max + yInterval / 3,
+      minY: min + minOffset,
+      maxY: max + maxOffset,
       lineTouchData: LineTouchData(
         enabled: true,
         getTouchedSpotIndicator:
@@ -193,7 +217,10 @@ class Chart extends StatelessWidget {
           return spotIndexes.map(
             (index) {
               return TouchedSpotIndicatorData(
-                FlLine(color: _lineColor(index)),
+                FlLine(
+                    color: _lineColor(index),
+                    strokeWidth:
+                        index == 0 || index == currencies.length - 1 ? 0 : 3),
                 FlDotData(
                   show: true,
                   getDotPainter: (spot, percent, barData, index) =>
@@ -201,7 +228,7 @@ class Chart extends StatelessWidget {
                     radius: (spot.x.toInt() == 0 ||
                             spot.x.toInt() == currencies.length - 1)
                         ? 0
-                        : 5,
+                        : 5.5,
                     color: _dotColor(spot.x.toInt()),
                     strokeWidth: 2,
                     strokeColor: Colors.black,
@@ -218,7 +245,7 @@ class Chart extends StatelessWidget {
               if (barSpot.x.toInt() == 0 ||
                   barSpot.x.toInt() == currencies.length - 1) return null;
               return LineTooltipItem(
-                currencies[barSpot.x.toInt()].mid.toString(),
+                currencies[barSpot.x.toInt()].mid.toStringAsFixed(3),
                 const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               );
@@ -274,21 +301,24 @@ class Chart extends StatelessWidget {
     required String text,
     double? top,
     double? bottom,
-    required double textHeight,
   }) {
     return Positioned(
       top: top,
       bottom: bottom,
-      left: 10,
+      left: 5,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black12,
+          color: Colors.black45,
         ),
         alignment: Alignment.center,
-        height: textHeight,
-        child: Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+        height: _textHeight,
+        child: Text(text,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Colors.white)),
       ),
     );
   }
