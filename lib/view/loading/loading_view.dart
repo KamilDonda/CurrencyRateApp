@@ -19,7 +19,6 @@ class LoadingView extends StatefulWidget {
 
 class _LoadingViewState extends State<LoadingView> {
   // URL: pub.dev/packages/connectivity_plus/example
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
@@ -55,19 +54,16 @@ class _LoadingViewState extends State<LoadingView> {
   }
 
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    setState(() {
-      if (result != ConnectivityResult.none) {
-        _showSnackBar(CustomTexts.downloadingData, Colors.green);
-        _fetchAll();
-      } else {
-        _showSnackBar(
-          CustomTexts.noConnection,
-          Colors.red,
-          function: () => _displayLastKnownData(),
-        );
-      }
-      _connectionStatus = result;
-    });
+    if (result != ConnectivityResult.none) {
+      _showSnackBar(CustomTexts.downloadingData, Colors.green);
+      _fetchAll();
+    } else {
+      _showSnackBar(
+        CustomTexts.noConnection,
+        Colors.red,
+        function: () => _displayLastKnownData(),
+      );
+    }
   }
 
   void _showSnackBar(

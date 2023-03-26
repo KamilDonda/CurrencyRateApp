@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:currency_rate_app/constants/supported_currencies.dart';
 import 'package:currency_rate_app/model/database/database.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
@@ -47,18 +48,15 @@ class FetchService {
         List<CurrencyDetailCombined> detailsList = [];
 
         for (var data in detailMid!.rates!) {
-          if (detail!.rates!
-              .any((e) => e.effectiveDate == data.effectiveDate)) {
+          var currency = detail!.rates!
+              .firstWhereOrNull((e) => e.effectiveDate == data.effectiveDate);
+          if (currency != null) {
             detailsList.add(
               CurrencyDetailCombined(
                 id: id++,
                 date: DateConverter.dd_MM_yyyy(data.effectiveDate!),
-                bid: detail.rates!
-                    .firstWhere((e) => e.effectiveDate == data.effectiveDate)
-                    .bid!,
-                ask: detail.rates!
-                    .firstWhere((e) => e.effectiveDate == data.effectiveDate)
-                    .ask!,
+                bid: currency.bid!,
+                ask: currency.ask!,
                 mid: data.mid!,
                 code: code,
               ),
