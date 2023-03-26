@@ -67,5 +67,8 @@ Screenshots come from 3 different emulators.
 ![](/img/11.png)
 
 ## Demo
-![](/img/1.gif)
-![](/img/2.gif)
+<p align="center">
+  <img src="./img/1.gif" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="./img/2.gif" width="45%">
+</p>
