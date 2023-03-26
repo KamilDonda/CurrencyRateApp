@@ -60,10 +60,8 @@ Screenshots come from 3 different emulators.
 
 **List view**
 
-![](/img/6.png)
-![](/img/7.png)
+![](/img/10.png)
 
 **Chart view**
 
-![](/img/8.png)
-![](/img/9.png)
+![](/img/11.png)
