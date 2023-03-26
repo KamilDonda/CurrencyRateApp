@@ -1,8 +1,10 @@
 # CurrencyRateApp / Waluty
 
 This is a Flutter Android application that shows currency exchange rates.
-#
-### Views
+
+</br>
+
+## Views
 There are 2 main views in the application:
 
 - The main view displaying available currencies (USD, EUR, GBP, CHF).
@@ -11,8 +13,10 @@ There are 2 main views in the application:
   - Chart view.
   
 Screenshots are available [below](#screenshots).
-#
-### Features
+
+</br>
+
+## Features
 - Displaying current* exchange rate for 4 currencies.
 - Displaying data for the last 30 days**, including:
   - Date.
@@ -26,7 +30,40 @@ Screenshots are available [below](#screenshots).
 - After reconnection to the internet, data is fetched from the API.
 
 \__________  
-\* Data comes from [api.nbp.pl](https://api.nbp.pl). The currently available data is retrieved from the API.  
+\*  Data comes from [api.nbp.pl](https://api.nbp.pl). The currently available data is retrieved from the API.  
 ** The data in the API is not updated daily, but only from Monday to Friday. The application retrieves the last 30 available data.
-#
-### Screenshots
+
+</br>
+
+
+## Screenshots
+Screenshots come from 3 different emulators.
+### Portrait
+
+**Home view**
+
+![](/img/1.png)
+
+**List view**
+
+![](/img/2.png)
+![](/img/3.png)
+
+**Chart view**
+
+![](/img/4.png)
+### Landscape
+
+**Home view**
+
+![](/img/5.png)
+
+**List view**
+
+![](/img/6.png)
+![](/img/7.png)
+
+**Chart view**
+
+![](/img/8.png)
+![](/img/9.png)
