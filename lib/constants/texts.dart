@@ -13,5 +13,10 @@ class CustomTexts {
   static const String sell = "Sprzedaż";
   static const String mean = "Średnia";
 
+  static const String exit = "Wyjście";
+  static const String exitContent = "Czy na pewno chcesz wyjść z aplikacji?";
+  static const String yes = "Tak";
+  static const String no = "Nie";
+
   static String update(String date) => "Aktualizacja:     $date";
 }

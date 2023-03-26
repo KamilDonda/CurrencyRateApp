@@ -8,14 +8,36 @@ import 'package:currency_rate_app/view/details/widgets/currency_item.dart';
 import 'package:currency_rate_app/view/widgets/data_not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_exit_app/flutter_exit_app.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
+  Future<bool> _showExitPopup(BuildContext context) async {
+    return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text(CustomTexts.exit),
+            content: const Text(CustomTexts.exitContent),
+            actions: [
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text(CustomTexts.no),
+              ),
+              ElevatedButton(
+                onPressed: () => FlutterExitApp.exitApp(),
+                child: const Text(CustomTexts.yes),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () => _showExitPopup(context),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
