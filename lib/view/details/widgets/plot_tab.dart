@@ -17,10 +17,11 @@ class PlotTab extends StatelessWidget {
   }) : super(key: key);
 
   Widget _chart(List<CurrencyDetailCombined> currencies) {
-    List<CurrencyDetailCombined> data = [];
-    data.addAll(currencies);
-    data.insert(0, currencies.first);
-    data.add(currencies.last);
+    List<CurrencyDetailCombined> data = [
+      currencies.first,
+      ...currencies,
+      currencies.last
+    ];
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification overscroll) {
         overscroll.disallowIndicator();
