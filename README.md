@@ -65,3 +65,7 @@ Screenshots come from 3 different emulators.
 **Chart view**
 
 ![](/img/11.png)
+
+## Demo
+![](/img/1.gif)
+![](/img/2.gif)
