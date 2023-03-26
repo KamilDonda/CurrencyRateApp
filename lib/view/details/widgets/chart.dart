@@ -32,6 +32,8 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double chartWidth = 1000;
     final appBarHeight = AppBar().preferredSize.height;
     final statusBarHeight = MediaQueryData.fromWindow(window).padding.top;
     final systemNavigationBarHeight =
@@ -70,7 +72,7 @@ class Chart extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: SizedBox(
-                width: 1000,
+                width: deviceWidth > chartWidth ? deviceWidth : chartWidth,
                 height: containerHeight,
                 child:
                     LineChart(_lineChartData(currencies, minOffset, maxOffset)),
