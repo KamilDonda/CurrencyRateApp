@@ -1,7 +1,7 @@
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
-import 'package:currency_rate_app/view/loading/loading_view.dart';
+import 'package:currency_rate_app/view/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: CustomColors.blue5),
         ),
-        home: const LoadingView(),
+        home: const HomeView(),
       ),
     );
   }
