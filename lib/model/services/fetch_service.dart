@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:currency_rate_app/constants/supported_currencies.dart';
-import 'package:currency_rate_app/model/database/database.dart';
+import 'package:currency_rate_app/model/currencies.dart';
 import 'package:currency_rate_app/model/entities/currency.dart';
 import 'package:currency_rate_app/model/entities/currency_detail/currency_detail_combined.dart';
 import 'package:currency_rate_app/model/services/rest_api_service.dart';
@@ -9,16 +9,13 @@ import 'package:currency_rate_app/utils/fetch_status.dart';
 
 class FetchService {
   static final _restApiService = RestApiService();
-  static final _database = DatabaseProvider().database;
 
   static Future<FetchStatus> fetchCurrencies() async {
-    final currencyDao = (await _database).currencyDao;
-
     for (var code in SupportedCurrencies.currencies) {
       try {
         var currency = await _restApiService.getLastValue(code);
         var name = currency!.currency!;
-        currencyDao.insertCurrency(
+        CURRENCIES.add(
           Currency(
             name: name.replaceFirst(name[0], name[0].toUpperCase()),
             countryCode: code.substring(0, 2),
@@ -37,8 +34,6 @@ class FetchService {
   }
 
   static Future<FetchStatus> fetchLast30Values() async {
-    final currencyDetailDao = (await _database).currencyDetailDao;
-
     int id = 1;
     for (var code in SupportedCurrencies.currencies) {
       try {
@@ -63,7 +58,7 @@ class FetchService {
             );
           }
         }
-        currencyDetailDao.insertCurrencyDetail(detailsList);
+        CURRENCY_DETAILS.addAll(detailsList);
       } catch (e) {
         return FetchStatusFailure();
       }

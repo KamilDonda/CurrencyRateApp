@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:currency_rate_app/view/details/cubit/currency_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/currency_detail_cubit.dart';
 import 'package:currency_rate_app/view/details/cubit/tab_cubit.dart';
@@ -11,6 +13,16 @@ import 'constants/custom_colors.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.unknown,
+      };
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +50,7 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: CustomColors.blue5),
         ),
+        scrollBehavior: MyCustomScrollBehavior(),
         home: const HomeView(),
       ),
     );
